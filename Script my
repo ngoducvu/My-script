@@ -1,0 +1,384 @@
+using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
+using System.Collections.Generic;
+
+public class GameCheatManager : MonoBehaviour
+{
+    // ========== TAB 1: FLY & NOCLIP ==========
+    [Header("FLY/NOCLIP SETTINGS")]
+    public bool flyMode = false;
+    public bool noClipMode = false;
+    public float flySpeed = 10f;
+    public float sprintSpeed = 20f;
+    public float verticalSpeed = 5f;
+    public float mouseSensitivity = 2f;
+    
+    private CharacterController characterController;
+    private Rigidbody playerRigidbody;
+    private Vector3 flyDirection;
+    private float flyVertical;
+    
+    // ========== TAB 2: ESP ==========
+    [Header("ESP SETTINGS")]
+    public bool espEnabled = false;
+    public float espMaxDistance = 100f;
+    
+    private Camera playerCamera;
+    private List<GameObject> enemies = new List<GameObject>();
+    
+    // ========== UI REFERENCES ==========
+    [Header("UI ELEMENTS")]
+    public GameObject tab1Panel;
+    public GameObject tab2Panel;
+    
+    // Tab 1 UI
+    public Toggle flyToggle;
+    public Toggle noClipToggle;
+    public Slider flySpeedSlider;
+    public TextMeshProUGUI flyStatusText;
+    
+    // Tab 2 UI
+    public Toggle espToggle;
+    public Slider espDistanceSlider;
+    public TextMeshProUGUI espStatusText;
+    public TextMeshProUGUI enemyCountText;
+    
+    // ========== INITIALIZATION ==========
+    void Start()
+    {
+        // Tự động tìm player components
+        FindPlayerComponents();
+        InitializeUI();
+        FindAllEnemies();
+        
+        // Mặc định hiển thị Tab 1
+        ShowTab(1);
+    }
+    
+    void FindPlayerComponents()
+    {
+        // Tìm CharacterController hoặc Rigidbody
+        characterController = GetComponent<CharacterController>();
+        if (characterController == null)
+            characterController = FindObjectOfType<CharacterController>();
+        
+        playerRigidbody = GetComponent<Rigidbody>();
+        if (playerRigidbody == null)
+            playerRigidbody = FindObjectOfType<Rigidbody>();
+        
+        // Tìm camera
+        playerCamera = Camera.main;
+        if (playerCamera == null)
+            playerCamera = FindObjectOfType<Camera>();
+    }
+    
+    void InitializeUI()
+    {
+        // Tab 1: Fly/NoClip
+        if (flyToggle != null)
+        {
+            flyToggle.isOn = flyMode;
+            flyToggle.onValueChanged.AddListener(ToggleFlyMode);
+        }
+        
+        if (noClipToggle != null)
+        {
+            noClipToggle.isOn = noClipMode;
+            noClipToggle.onValueChanged.AddListener(ToggleNoClipMode);
+        }
+        
+        if (flySpeedSlider != null)
+        {
+            flySpeedSlider.value = flySpeed;
+            flySpeedSlider.onValueChanged.AddListener((value) => {
+                flySpeed = value;
+                if (flyStatusText != null)
+                    flyStatusText.text = $"Fly Speed: {value:F1}";
+            });
+        }
+        
+        // Tab 2: ESP
+        if (espToggle != null)
+        {
+            espToggle.isOn = espEnabled;
+            espToggle.onValueChanged.AddListener(ToggleESP);
+        }
+        
+        if (espDistanceSlider != null)
+        {
+            espDistanceSlider.value = espMaxDistance;
+            espDistanceSlider.onValueChanged.AddListener((value) => {
+                espMaxDistance = value;
+                if (espStatusText != null)
+                    espStatusText.text = $"ESP Range: {value:F0}m";
+            });
+        }
+    }
+    
+    // ========== UPDATE LOOP ==========
+    void Update()
+    {
+        // Xử lý Fly/NoClip
+        if (flyMode || noClipMode)
+        {
+            HandleFlyMovement();
+        }
+        
+        // ESP update
+        if (espEnabled)
+        {
+            UpdateESP();
+        }
+    }
+    
+    // ========== TAB 1: FLY & NOCLIP FUNCTIONS ==========
+    void HandleFlyMovement()
+    {
+        if (playerCamera == null) return;
+        
+        // Di chuyển bay
+        float horizontal = Input.GetAxis("Horizontal");
+        float vertical = Input.GetAxis("Vertical");
+        
+        // Bay lên/xuống
+        if (Input.GetKey(KeyCode.Space)) flyVertical = 1f;
+        else if (Input.GetKey(KeyCode.LeftControl)) flyVertical = -1f;
+        else flyVertical = 0f;
+        
+        // Tính toán hướng di chuyển
+        Vector3 forward = playerCamera.transform.forward;
+        Vector3 right = playerCamera.transform.right;
+        
+        forward.y = 0;
+        right.y = 0;
+        forward.Normalize();
+        right.Normalize();
+        
+        flyDirection = (forward * vertical + right * horizontal).normalized;
+        
+        // Tốc độ
+        float currentSpeed = Input.GetKey(KeyCode.LeftShift) ? sprintSpeed : flySpeed;
+        
+        // Di chuyển
+        Vector3 move = (flyDirection * currentSpeed + Vector3.up * flyVertical * verticalSpeed) * Time.deltaTime;
+        
+        // Áp dụng movement
+        if (noClipMode && characterController != null)
+        {
+            // NoClip: di chuyển trực tiếp
+            characterController.Move(move);
+        }
+        else if (playerRigidbody != null)
+        {
+            // Fly mode với Rigidbody
+            playerRigidbody.velocity = move / Time.deltaTime;
+        }
+        else if (characterController != null)
+        {
+            // Fallback cho CharacterController
+            characterController.Move(move);
+        }
+        else
+        {
+            // Transform movement nếu không có component nào
+            transform.Translate(move, Space.World);
+        }
+    }
+    
+    public void ToggleFlyMode(bool enabled)
+    {
+        flyMode = enabled;
+        
+        if (flyStatusText != null)
+            flyStatusText.text = enabled ? "Fly Mode: ON" : "Fly Mode: OFF";
+        
+        if (enabled && characterController != null)
+        {
+            characterController.enabled = !enabled; // Tắt CharacterController khi bay
+        }
+    }
+    
+    public void ToggleNoClipMode(bool enabled)
+    {
+        noClipMode = enabled;
+        
+        if (characterController != null)
+        {
+            characterController.enabled = !enabled;
+            if (!enabled)
+            {
+                characterController.enabled = true;
+            }
+        }
+    }
+    
+    // ========== TAB 2: ESP FUNCTIONS ==========
+    void FindAllEnemies()
+    {
+        enemies.Clear();
+        
+        // Tìm enemy bằng tag
+        GameObject[] enemyObjects = GameObject.FindGameObjectsWithTag("Enemy");
+        enemies.AddRange(enemyObjects);
+        
+        // Nếu không có tag "Enemy", tìm bằng name chứa "enemy"
+        if (enemies.Count == 0)
+        {
+            GameObject[] allObjects = FindObjectsOfType<GameObject>();
+            foreach (GameObject obj in allObjects)
+            {
+                if (obj.name.ToLower().Contains("enemy") || obj.name.ToLower().Contains("zombie"))
+                {
+                    enemies.Add(obj);
+                }
+            }
+        }
+        
+        UpdateEnemyCount();
+    }
+    
+    void UpdateESP()
+    {
+        // Cập nhật enemy count mỗi giây
+        if (Time.frameCount % 60 == 0) // Mỗi 60 frame
+        {
+            FindAllEnemies();
+        }
+    }
+    
+    void OnGUI()
+    {
+        if (!espEnabled || playerCamera == null) return;
+        
+        // Vẽ ESP cho mỗi enemy
+        foreach (GameObject enemy in enemies)
+        {
+            if (enemy == null) continue;
+            
+            Vector3 screenPos = playerCamera.WorldToScreenPoint(enemy.transform.position);
+            
+            // Kiểm tra xem enemy có trong tầm nhìn không
+            if (screenPos.z > 0 && 
+                screenPos.x > 0 && screenPos.x < Screen.width &&
+                screenPos.y > 0 && screenPos.y < Screen.height)
+            {
+                // Tính khoảng cách
+                float distance = Vector3.Distance(playerCamera.transform.position, enemy.transform.position);
+                
+                if (distance <= espMaxDistance)
+                {
+                    DrawEnemyESP(screenPos, enemy.name, distance);
+                }
+            }
+        }
+    }
+    
+    void DrawEnemyESP(Vector3 screenPos, string enemyName, float distance)
+    {
+        // Chuyển đổi tọa độ GUI
+        screenPos.y = Screen.height - screenPos.y;
+        
+        // Màu sắc dựa trên khoảng cách
+        Color espColor = Color.Lerp(Color.red, Color.yellow, distance / espMaxDistance);
+        
+        // Vẽ box
+        float boxSize = Mathf.Clamp(1000 / distance, 20, 100);
+        DrawBox(screenPos, boxSize, boxSize, 2, espColor);
+        
+        // Vẽ text
+        string info = $"{enemyName}\n{distance:F1}m";
+        DrawText(screenPos, info, espColor);
+    }
+    
+    void DrawBox(Vector3 pos, float width, float height, int thickness, Color color)
+    {
+        // Vẽ box đơn giản
+        Rect box = new Rect(pos.x - width/2, pos.y - height/2, width, height);
+        
+        // Vẽ 4 cạnh
+        GUI.color = color;
+        GUI.DrawTexture(new Rect(box.x, box.y, box.width, thickness), Texture2D.whiteTexture);
+        GUI.DrawTexture(new Rect(box.x, box.y + box.height - thickness, box.width, thickness), Texture2D.whiteTexture);
+        GUI.DrawTexture(new Rect(box.x, box.y, thickness, box.height), Texture2D.whiteTexture);
+        GUI.DrawTexture(new Rect(box.x + box.width - thickness, box.y, thickness, box.height), Texture2D.whiteTexture);
+        GUI.color = Color.white;
+    }
+    
+    void DrawText(Vector3 pos, string text, Color color)
+    {
+        GUIStyle style = new GUIStyle();
+        style.normal.textColor = color;
+        style.fontSize = 12;
+        style.fontStyle = FontStyle.Bold;
+        style.alignment = TextAnchor.UpperCenter;
+        
+        Vector2 size = style.CalcSize(new GUIContent(text));
+        Rect textRect = new Rect(pos.x - size.x/2, pos.y - size.y - 10, size.x, size.y);
+        
+        // Background
+        GUI.color = new Color(0, 0, 0, 0.5f);
+        GUI.DrawTexture(new Rect(textRect.x - 5, textRect.y - 2, textRect.width + 10, textRect.height + 4), Texture2D.whiteTexture);
+        GUI.color = Color.white;
+        
+        // Text
+        GUI.Label(textRect, text, style);
+    }
+    
+    public void ToggleESP(bool enabled)
+    {
+        espEnabled = enabled;
+        
+        if (espStatusText != null)
+            espStatusText.text = enabled ? "ESP: ON" : "ESP: OFF";
+        
+        if (enabled)
+        {
+            FindAllEnemies();
+        }
+    }
+    
+    void UpdateEnemyCount()
+    {
+        if (enemyCountText != null)
+            enemyCountText.text = $"Enemies: {enemies.Count}";
+    }
+    
+    // ========== TAB SWITCHING ==========
+    public void ShowTab(int tabNumber)
+    {
+        // Ẩn tất cả panels
+        if (tab1Panel != null) tab1Panel.SetActive(false);
+        if (tab2Panel != null) tab2Panel.SetActive(false);
+        
+        // Hiển thị panel được chọn
+        switch (tabNumber)
+        {
+            case 1:
+                if (tab1Panel != null) tab1Panel.SetActive(true);
+                break;
+            case 2:
+                if (tab2Panel != null) tab2Panel.SetActive(true);
+                if (espEnabled) FindAllEnemies();
+                break;
+        }
+    }
+    
+    // ========== UTILITY FUNCTIONS ==========
+    public void RefreshEnemies()
+    {
+        FindAllEnemies();
+    }
+    
+    public void SetFlySpeed(float speed)
+    {
+        flySpeed = speed;
+        if (flySpeedSlider != null) flySpeedSlider.value = speed;
+    }
+    
+    public void SetESPDistance(float distance)
+    {
+        espMaxDistance = distance;
+        if (espDistanceSlider != null) espDistanceSlider.value = distance;
+    }
+}
