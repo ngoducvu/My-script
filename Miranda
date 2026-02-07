@@ -1,0 +1,1334 @@
+-- deobfuscated by d1rk hub
+
+
+local fenv = getfenv()
+coroutine.yield(true, 1, game)
+coroutine.yield(true, 2, workspace)
+coroutine.yield(true, 3, script)
+game:GetService("Workspace")
+game:GetService("Players")
+game:GetService("RunService")
+game:GetService("ReplicatedStorage")
+game:GetService("UserInputService")
+game:GetService("CoreGui")
+local _call19 = game:GetService("HttpService")
+game:GetService("SoundService")
+task.wait(0.1)
+local _call25 = game:GetService("Players")
+game:GetService("RunService")
+local _call29 = game:GetService("ReplicatedStorage")
+local _call31 = game:GetService("Workspace")
+game:GetService("SoundService")
+local _call37 = game:GetService("StarterGui")
+game:GetService("TweenService")
+game:GetService("Lighting")
+task.wait(0.1)
+local _LocalPlayer42 = _call25.LocalPlayer
+_LocalPlayer42:WaitForChild("PlayerGui")
+local _ = fenv.espBoxes
+fenv.espBoxes = {}
+local _ = fenv.espConfig
+fenv.espConfig = {
+    enabledBase = false,
+    enabledPlayer = false,
+    enabledBest = false,
+}
+fenv.ESP_RED_BRIGHT = Color3.fromRGB(200, 0, 0)
+local _ = fenv.MAIN_ACTIVE_RED
+local _call51 = Color3.fromRGB(255, 60, 60)
+fenv.MAIN_ACTIVE_RED = _call51
+local _ = fenv.MAIN_OFF_RED
+local _call54 = Color3.fromRGB(110, 0, 0)
+fenv.MAIN_OFF_RED = _call54
+local _ = fenv.BEST_OFF_RED
+fenv.BEST_OFF_RED = Color3.fromRGB(200, 0, 0)
+local _ = fenv.ESP_GREEN
+fenv.ESP_GREEN = Color3.fromRGB(60, 255, 60)
+local _ = fenv.ESP_FONT_NAME
+fenv.ESP_FONT_NAME = Enum.Font.Arcade
+local _ = fenv.ESP_UPDATE_INTERVAL
+fenv.ESP_UPDATE_INTERVAL = 2.5
+local _ = fenv.GLOW_UPDATE_INTERVAL
+fenv.GLOW_UPDATE_INTERVAL = 0.25
+fenv.parseMoneyPerSec = function(...)
+    local _66_vararg1 = ...
+    type(_66_vararg1)
+    return 0
+end
+fenv.getHumanoid = function(...)
+    return _LocalPlayer42.Character:FindFirstChildOfClass("Humanoid")
+end
+fenv.getHRP = function(...)
+    return _LocalPlayer42.Character:FindFirstChild("HumanoidRootPart")
+end
+fenv.notify = function(...)
+    local _75_vararg1, _75_vararg2, _75_vararg3 = ...
+    _call37:SetCore("SendNotification", {
+        Text = tostring(_75_vararg2),
+        Title = tostring(_75_vararg1),
+        Duration = _75_vararg3,
+    })
+end
+fenv.showNotification = function(...)
+    local _80_vararg1, _80_vararg2, _80_vararg3 = ...
+    _call37:SetCore("SendNotification", {
+        Text = tostring(_80_vararg1),
+        Title = "Miranda Hub",
+        Duration = _80_vararg3,
+    })
+end
+_call31:FindFirstChild("Turrets")
+_LocalPlayer42.CharacterAdded:Connect(function(...)
+
+end)
+_call31.ChildAdded:Connect(function(...)
+    local _93_vararg1 = ...
+    local _ = _93_vararg1.Name
+end)
+local _call96 = game:GetService("Lighting")
+local _CurrentCamera97 = _call31.CurrentCamera
+local _call99 = _LocalPlayer42:WaitForChild("PlayerScripts")
+local _req105 = require(_call29.Packages.Net)
+local _call110 = require(_call99:WaitForChild("PlayerModule")):GetControls()
+local _FieldOfView111 = _CurrentCamera97.FieldOfView
+local _Ambient112 = _call96.Ambient
+local _OutdoorAmbient113 = _call96.OutdoorAmbient
+local _originalMoveFunction114 = require(_call29.Controllers.CharacterController).originalMoveFunction
+fenv.startAntiBee = function(...)
+    _CurrentCamera97:GetPropertyChangedSignal("FieldOfView"):Connect(function(...)
+        _CurrentCamera97.FieldOfView = _FieldOfView111
+        _call96.Ambient = _Ambient112
+        _call96.OutdoorAmbient = _OutdoorAmbient113
+        _call110.moveFunction = _originalMoveFunction114
+    end)
+    _call96.Changed:Connect(function(...)
+        _CurrentCamera97.FieldOfView = _FieldOfView111
+        _call96.Ambient = _Ambient112
+        _call96.OutdoorAmbient = _OutdoorAmbient113
+        _call110.moveFunction = _originalMoveFunction114
+    end)
+    _call96.ChildAdded:Connect(function(...)
+        local _128_vararg1 = ...
+        local _ = _128_vararg1.ClassName
+    end)
+    _call96.ChildAdded:Connect(function(...)
+        for _136, _136_2 in _call96:GetChildren() do
+            coroutine.yield(true, _136, _136_2)
+        end
+    end)
+    _req105:RemoteEvent("UseItem").OnClientEvent:Connect(function(...)
+    end)
+    for _146, _146_2 in _call96:GetChildren() do
+        coroutine.yield(true, _146, _146_2)
+    end
+end
+fenv.stopAntiBee = function(...)
+    coroutine.yield(true, "useItem", _call142)
+    coroutine.yield(true, "fov", _call119)
+    coroutine.yield(true, "lighting", _call123)
+    coroutine.yield(true, "childAdded", _call127)
+    coroutine.yield(true, "clearEffects", _call132)
+end
+_LocalPlayer42:WaitForChild("PlayerGui")
+local _call161 = Color3.new(1, 1, 1)
+local _call163 = Color3.fromRGB(255, 50, 50)
+local _call165 = Color3.fromRGB(180, 180, 180)
+local _ = game:GetService("UserInputService").TouchEnabled
+local _call169 = Instance.new("ScreenGui")
+_call169.AutoLocalize = false
+_call169.ResetOnSpawn = false
+_call169.Name = "MirandaTweenPlus_FULL"
+coroutine.yield(true, "Parent", gethui())
+_LocalPlayer42.CharacterAdded:Connect(function(...)
+    task.wait(0.5)
+    local _ = _call169.Parent == gethui()
+    _call169.Parent = gethui()
+end)
+local _call184 = Instance.new("Frame")
+_call184.AutoLocalize = false
+_call184.Visible = false
+_call184.Name = "VIPMenu"
+_call184.BackgroundTransparency = 0.05
+coroutine.yield(true, "Position", UDim2.new(0.5, - 75, 0, 15))
+coroutine.yield(true, "Parent", _call169)
+coroutine.yield(true, "BackgroundColor3", Color3.fromRGB(12, 12, 18))
+_call184.BorderSizePixel = 0
+coroutine.yield(true, "Size", UDim2.new(0, 150, 0, 236))
+local _call192 = Instance.new("UICorner")
+_call192.AutoLocalize = false
+coroutine.yield(true, "Parent", _call184)
+coroutine.yield(true, "CornerRadius", UDim.new(0, 8))
+local _call196 = Instance.new("UIStroke")
+_call196.AutoLocalize = false
+_call196.Thickness = 1.5
+_call196.Transparency = 0.3
+coroutine.yield(true, "Parent", _call184)
+coroutine.yield(true, "Color", Color3.fromRGB(255, 40, 40))
+local _call206 = Instance.new("TextLabel")
+_call206.AutoLocalize = false
+coroutine.yield(true, "TextColor3", _call163)
+coroutine.yield(true, "Font", Enum.Font.Arcade)
+_call206.BackgroundTransparency = 1
+coroutine.yield(true, "Position", UDim2.new(0, 0, 0, 2))
+coroutine.yield(true, "Parent", _call184)
+_call206.Text = "MIRANDA HUB"
+_call206.TextSize = 13
+coroutine.yield(true, "Size", UDim2.new(1, 0, 0, 18))
+local _call221 = Instance.new("TextLabel")
+_call221.AutoLocalize = false
+coroutine.yield(true, "TextColor3", _call165)
+coroutine.yield(true, "Parent", _call184)
+_call221.Text = "TTK: @mirandacallruim"
+coroutine.yield(true, "Font", Enum.Font.Arcade)
+_call221.BackgroundTransparency = 1
+coroutine.yield(true, "Position", UDim2.new(0, 10, 0, 18))
+coroutine.yield(true, "TextXAlignment", Enum.TextXAlignment.Center)
+_call221.TextSize = 9
+coroutine.yield(true, "Size", UDim2.new(1, - 20, 0, 10))
+local _call235 = Instance.new("TextLabel")
+_call235.AutoLocalize = false
+coroutine.yield(true, "TextColor3", _call163)
+_call235.TextTransparency = 1
+_call235.Text = ""
+coroutine.yield(true, "Font", Enum.Font.Arcade)
+_call235.BackgroundTransparency = 1
+coroutine.yield(true, "Position", UDim2.new(0.05, 0, 1, - 13))
+coroutine.yield(true, "Parent", _call184)
+_call235.TextSize = 9
+coroutine.yield(true, "Size", UDim2.new(0.9, 0, 0, 15))
+fenv.statusLabel = _call235
+fenv.showStatus = function(...)
+    local _241_vararg1, _241_vararg2 = ...
+    _call235.Text = _241_vararg1
+    _call235.TextColor3 = _241_vararg2
+    _call235.TextTransparency = 0
+end
+local _gameReplicatedStorage242 = game.ReplicatedStorage
+require(_gameReplicatedStorage242.Packages.Synchronizer)
+require(_gameReplicatedStorage242.Shared.Animals)
+require(_gameReplicatedStorage242.Utils.NumberUtils)
+require(_gameReplicatedStorage242.Datas.Animals)
+local _ = game.Workspace.Plots
+local _call264 = Instance.new("TextButton")
+_call264.AutoLocalize = false
+coroutine.yield(true, "TextColor3", _call161)
+coroutine.yield(true, "Parent", _call184)
+_call264.Text = "ESP BEST"
+coroutine.yield(true, "Font", Enum.Font.Arcade)
+coroutine.yield(true, "Position", UDim2.new(0.05, 0, 0, 30))
+_call264.BorderSizePixel = 0
+coroutine.yield(true, "BackgroundColor3", _call54)
+_call264.TextSize = 10
+coroutine.yield(true, "Size", UDim2.new(0.9, 0, 0, 28))
+local _call274 = Instance.new("UICorner")
+_call274.AutoLocalize = false
+coroutine.yield(true, "Parent", _call264)
+coroutine.yield(true, "CornerRadius", UDim.new(0, 6))
+_call264.BackgroundColor3 = _call54
+_call264.MouseButton1Click:Connect(function(...)
+    task.delay(0.35, function(...)
+    end)
+    makefolder("MirandaTweenPlus")
+    local _call286 = _call19:JSONEncode({
+        espPlayer = false,
+        antiDebuff = false,
+        espBase = false,
+        infJump = false,
+        reduceGraphics = false,
+        stealFloorInsta = false,
+        keybinds = {},
+        flyToBest = true,
+        espBest = true,
+        nearest = false,
+        xRay = false,
+        hasProvenCarpet = false,
+        autoKick = false,
+        hideSkin = false,
+        speed = false,
+        unwalk = false,
+        roupa = false,
+        antiRagdoll = false,
+    })
+    writefile("MirandaTweenPlus/config.json", _call286)
+    task.spawn(function(...)
+        local _ = _LocalPlayer42.Character
+        _LocalPlayer42.Character:FindFirstChild("HumanoidRootPart")
+        local _ = _LocalPlayer42.Character
+        _LocalPlayer42.Character:FindFirstChild("HumanoidRootPart")
+        local _ = fenv.safeDisconnectHelper
+        error("Luraph Script:1021: line 3: attempt to call a nil value")
+    end)
+    _call264.BackgroundColor3 = _call51
+end)
+local _call306 = Instance.new("TextButton")
+_call306.AutoLocalize = false
+coroutine.yield(true, "TextColor3", _call161)
+coroutine.yield(true, "Parent", _call184)
+_call306.Text = "ESP BASE"
+coroutine.yield(true, "Font", Enum.Font.Arcade)
+coroutine.yield(true, "Position", UDim2.new(0.05, 0, 0, 65))
+_call306.BorderSizePixel = 0
+coroutine.yield(true, "BackgroundColor3", _call54)
+_call306.TextSize = 10
+coroutine.yield(true, "Size", UDim2.new(0.43, 0, 0, 28))
+local _call316 = Instance.new("UICorner")
+_call316.AutoLocalize = false
+coroutine.yield(true, "Parent", _call306)
+coroutine.yield(true, "CornerRadius", UDim.new(0, 6))
+_call306.BackgroundColor3 = _call54
+_call306.MouseButton1Click:Connect(function(...)
+    task.delay(0.35, function(...)
+    end)
+    makefolder("MirandaTweenPlus")
+    local _call328 = _call19:JSONEncode({
+        espPlayer = false,
+        antiDebuff = false,
+        espBase = true,
+        infJump = false,
+        reduceGraphics = false,
+        stealFloorInsta = false,
+        keybinds = {},
+        flyToBest = true,
+        espBest = true,
+        nearest = false,
+        xRay = false,
+        hasProvenCarpet = false,
+        autoKick = false,
+        hideSkin = false,
+        speed = false,
+        unwalk = false,
+        roupa = false,
+        antiRagdoll = false,
+    })
+    writefile("MirandaTweenPlus/config.json", _call328)
+    _call306.BackgroundColor3 = _call51
+end)
+local _call336 = Instance.new("TextButton")
+_call336.AutoLocalize = false
+coroutine.yield(true, "TextColor3", _call161)
+coroutine.yield(true, "Parent", _call184)
+_call336.Text = "ESP PLAYER"
+coroutine.yield(true, "Font", Enum.Font.Arcade)
+coroutine.yield(true, "Position", UDim2.new(0.52, 0, 0, 65))
+_call336.BorderSizePixel = 0
+coroutine.yield(true, "BackgroundColor3", _call54)
+_call336.TextSize = 10
+coroutine.yield(true, "Size", UDim2.new(0.43, 0, 0, 28))
+local _call346 = Instance.new("UICorner")
+_call346.AutoLocalize = false
+coroutine.yield(true, "Parent", _call336)
+coroutine.yield(true, "CornerRadius", UDim.new(0, 6))
+_call336.BackgroundColor3 = _call54
+_call336.MouseButton1Click:Connect(function(...)
+    task.delay(0.35, function(...)
+    end)
+    makefolder("MirandaTweenPlus")
+    local _call358 = _call19:JSONEncode({
+        espPlayer = true,
+        antiDebuff = false,
+        espBase = true,
+        infJump = false,
+        reduceGraphics = false,
+        stealFloorInsta = false,
+        keybinds = {},
+        flyToBest = true,
+        espBest = true,
+        nearest = false,
+        xRay = false,
+        hasProvenCarpet = false,
+        autoKick = false,
+        hideSkin = false,
+        speed = false,
+        unwalk = false,
+        roupa = false,
+        antiRagdoll = false,
+    })
+    writefile("MirandaTweenPlus/config.json", _call358)
+    _call336.BackgroundColor3 = _call51
+    for _361, _361_2 in _call25:GetPlayers() do
+        coroutine.yield(true, _361, _361_2)
+    end
+    _call25.PlayerAdded:Connect(function(...)
+        local _366_vararg1 = ...
+        local _ = _366_vararg1 == _LocalPlayer42
+        local _ = _366_vararg1 == _LocalPlayer42
+        _366_vararg1.CharacterAdded:Connect(function(...)
+            local _372_vararg1 = ...
+            task.wait(0.2)
+            local _call374 = _372_vararg1:FindFirstChild("ESP_HL")
+            local _call376 = _372_vararg1:FindFirstChild("ESP_Name")
+            _call374:Destroy()
+            _call376:Destroy()
+            local _call384 = Instance.new("Highlight", _372_vararg1)
+            _call384.Name = "ESP_HL"
+            _call384.FillColor = Color3.fromRGB(255, 0, 0)
+            _call384.OutlineColor = Color3.fromRGB(255, 255, 255)
+            _call384.FillTransparency = 0.55
+            _call384.OutlineTransparency = 0.5
+            _call384.DepthMode = Enum.HighlightDepthMode.AlwaysOnTop
+            local _call392 = Instance.new("BillboardGui", _372_vararg1:FindFirstChild("HumanoidRootPart"))
+            _call392.Name = "ESP_Name"
+            _call392.Size = UDim2.new(0, 70, 0, 20)
+            _call392.AlwaysOnTop = true
+            _call392.StudsOffset = Vector3.new(0, 3, 0)
+            local _call398 = Instance.new("TextLabel", _call392)
+            _call398.Size = UDim2.new(1, 0, 1, 0)
+            _call398.BackgroundTransparency = 1
+            _call398.Text = _366_vararg1.Name
+            _call398.Font = Enum.Font.GothamBold
+            _call398.TextScaled = true
+            _call398.TextColor3 = Color3.new(1, 1, 1)
+            _call398.TextStrokeTransparency = 0.2
+        end)
+        local _ = _366_vararg1.Character
+        local _Character407 = _366_vararg1.Character
+        local _call409 = _Character407:FindFirstChild("ESP_HL")
+        local _call411 = _Character407:FindFirstChild("ESP_Name")
+        _call409:Destroy()
+        _call411:Destroy()
+        local _call419 = Instance.new("Highlight", _Character407)
+        _call419.Name = "ESP_HL"
+        _call419.FillColor = Color3.fromRGB(255, 0, 0)
+        _call419.OutlineColor = Color3.fromRGB(255, 255, 255)
+        _call419.FillTransparency = 0.55
+        _call419.OutlineTransparency = 0.5
+        _call419.DepthMode = Enum.HighlightDepthMode.AlwaysOnTop
+        local _call427 = Instance.new("BillboardGui", _Character407:FindFirstChild("HumanoidRootPart"))
+        _call427.Name = "ESP_Name"
+        _call427.Size = UDim2.new(0, 70, 0, 20)
+        _call427.AlwaysOnTop = true
+        _call427.StudsOffset = Vector3.new(0, 3, 0)
+        local _call433 = Instance.new("TextLabel", _call427)
+        _call433.Size = UDim2.new(1, 0, 1, 0)
+        _call433.BackgroundTransparency = 1
+        _call433.Text = _366_vararg1.Name
+        _call433.Font = Enum.Font.GothamBold
+        _call433.TextScaled = true
+        _call433.TextColor3 = Color3.new(1, 1, 1)
+        _call433.TextStrokeTransparency = 0.2
+    end)
+    _call25.PlayerRemoving:Connect(function(...)
+        local _444_vararg1 = ...
+        local _ = _444_vararg1.Character
+        local _Character446 = _444_vararg1.Character
+        local _call448 = _Character446:FindFirstChild("ESP_HL")
+        local _call450 = _Character446:FindFirstChild("ESP_Name")
+        _call448:Destroy()
+        _call450:Destroy()
+    end)
+end)
+task.spawn(function(...)
+    task.wait(0.5)
+end)
+game:IsLoaded()
+cloneref(game:GetService("ProximityPromptService"))
+local _ = game:GetService("Players").LocalPlayer
+require(game:GetService("ReplicatedStorage").Packages.Net)
+local _call478 = Instance.new("TextButton")
+_call478.AutoLocalize = false
+coroutine.yield(true, "TextColor3", _call161)
+coroutine.yield(true, "Parent", _call184)
+_call478.Text = "AUTO KICK"
+coroutine.yield(true, "Font", Enum.Font.Arcade)
+coroutine.yield(true, "Position", UDim2.new(0.05, 0, 0, 97))
+_call478.BorderSizePixel = 0
+coroutine.yield(true, "BackgroundColor3", _call54)
+_call478.TextSize = 10
+coroutine.yield(true, "Size", UDim2.new(0.43, 0, 0, 28))
+local _call488 = Instance.new("UICorner")
+_call488.AutoLocalize = false
+coroutine.yield(true, "Parent", _call478)
+coroutine.yield(true, "CornerRadius", UDim.new(0, 6))
+_call478.BackgroundColor3 = _call54
+_call478.MouseButton1Click:Connect(function(...)
+    task.delay(0.35, function(...)
+    end)
+    makefolder("MirandaTweenPlus")
+    local _call500 = _call19:JSONEncode({
+        espPlayer = true,
+        antiDebuff = false,
+        espBase = true,
+        infJump = false,
+        reduceGraphics = false,
+        stealFloorInsta = false,
+        keybinds = {},
+        flyToBest = true,
+        espBest = true,
+        nearest = false,
+        xRay = false,
+        hasProvenCarpet = false,
+        autoKick = true,
+        hideSkin = false,
+        speed = false,
+        unwalk = false,
+        roupa = false,
+        antiRagdoll = false,
+    })
+    writefile("MirandaTweenPlus/config.json", _call500)
+    for _505, _505_2 in _call31:FindFirstChild("Plots"):GetChildren() do
+        coroutine.yield(true, _505, _505_2)
+    end
+    _call478.BackgroundColor3 = _call51
+end)
+require(_call29.Packages.Synchronizer)
+require(_call29.Shared.Animals)
+require(_call29.Datas.Animals)
+local _call519 = _call29:FindFirstChild("Packages"):FindFirstChild("Net")
+_call519:FindFirstChild("RF/5aa39ea1-0c65-4fcf-aff9-b18a7ef277c3")
+_call519:FindFirstChild("RE/5aa39ea1-0c65-4fcf-aff9-b18a7ef277c3")
+local _call527 = _call29:FindFirstChild("Packages"):FindFirstChild("Net")
+_call527:FindFirstChild("RF/b096e1ca-9c3a-453b-8b60-268b235083b9")
+_call527:FindFirstChild("RE/b096e1ca-9c3a-453b-8b60-268b235083b9")
+task.spawn(function(...)
+    local _DataPing537 = game:GetService("Stats").Network.ServerStatsItem["Data Ping"]
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    local _ = _DataPing537:GetValue() / 1000
+    task.wait(1)
+    error("Luraph Script:1378: internal 546: <25ms: infinitelooperror>")
+end)
+local _call1497 = Instance.new("TextButton")
+_call1497.AutoLocalize = false
+coroutine.yield(true, "TextColor3", _call161)
+coroutine.yield(true, "Parent", _call184)
+_call1497.Text = "NEAREST"
+coroutine.yield(true, "Font", Enum.Font.Arcade)
+coroutine.yield(true, "Position", UDim2.new(0.52, 0, 0, 97))
+_call1497.BorderSizePixel = 0
+coroutine.yield(true, "BackgroundColor3", _call54)
+_call1497.TextSize = 10
+coroutine.yield(true, "Size", UDim2.new(0.43, 0, 0, 28))
+local _call1507 = Instance.new("UICorner")
+_call1507.AutoLocalize = false
+coroutine.yield(true, "Parent", _call1497)
+coroutine.yield(true, "CornerRadius", UDim.new(0, 6))
+_call1497.BackgroundColor3 = _call54
+_call1497.MouseButton1Click:Connect(function(...)
+    task.delay(0.35, function(...)
+    end)
+    makefolder("MirandaTweenPlus")
+    local _call1519 = _call19:JSONEncode({
+        espPlayer = true,
+        antiDebuff = false,
+        espBase = true,
+        infJump = false,
+        reduceGraphics = false,
+        stealFloorInsta = false,
+        keybinds = {},
+        flyToBest = true,
+        espBest = true,
+        nearest = true,
+        xRay = false,
+        hasProvenCarpet = false,
+        autoKick = true,
+        hideSkin = false,
+        speed = false,
+        unwalk = false,
+        roupa = false,
+        antiRagdoll = false,
+    })
+    writefile("MirandaTweenPlus/config.json", _call1519)
+    for _1523, _1523_2 in _call31.Plots:GetChildren() do
+        coroutine.yield(true, _1523, _1523_2)
+    end
+    task.spawn(function(...)
+        error("Luraph Script:1463: Luraph Script:1427: internal 546: <25ms: infinitelooperror>")
+    end)
+    _call1497.BackgroundColor3 = _call51
+end)
+task.spawn(function(...)
+
+end)
+local _call1539 = Instance.new("TextButton")
+_call1539.AutoLocalize = false
+coroutine.yield(true, "TextColor3", _call161)
+coroutine.yield(true, "Parent", _call184)
+_call1539.Text = "X-RAY"
+coroutine.yield(true, "Font", Enum.Font.Arcade)
+coroutine.yield(true, "Position", UDim2.new(0.05, 0, 0, 129))
+_call1539.BorderSizePixel = 0
+coroutine.yield(true, "BackgroundColor3", _call54)
+_call1539.TextSize = 10
+coroutine.yield(true, "Size", UDim2.new(0.43, 0, 0, 28))
+local _call1549 = Instance.new("UICorner")
+_call1549.AutoLocalize = false
+coroutine.yield(true, "Parent", _call1539)
+coroutine.yield(true, "CornerRadius", UDim.new(0, 6))
+game:IsLoaded()
+cloneref(game:GetService("ProximityPromptService"))
+local _ = game:GetService("Players").LocalPlayer
+require(game:GetService("ReplicatedStorage").Packages.Net)
+local _call1572 = Instance.new("TextButton")
+_call1572.AutoLocalize = false
+coroutine.yield(true, "TextColor3", _call161)
+coroutine.yield(true, "Parent", _call184)
+_call1572.Text = "AUTO KICK"
+coroutine.yield(true, "Font", Enum.Font.Arcade)
+coroutine.yield(true, "Position", UDim2.new(0.05, 0, 0, 97))
+_call1572.BorderSizePixel = 0
+coroutine.yield(true, "BackgroundColor3", _call54)
+_call1572.TextSize = 10
+coroutine.yield(true, "Size", UDim2.new(0.43, 0, 0, 28))
+local _call1582 = Instance.new("UICorner")
+_call1582.AutoLocalize = false
+coroutine.yield(true, "Parent", _call1572)
+coroutine.yield(true, "CornerRadius", UDim.new(0, 6))
+_call1572.BackgroundColor3 = _call51
+_call1572.MouseButton1Click:Connect(function(...)
+
+end)
+local _call1596 = Instance.new("TextButton")
+_call1596.AutoLocalize = false
+coroutine.yield(true, "TextColor3", _call161)
+coroutine.yield(true, "Parent", _call184)
+_call1596.Text = "X-RAY"
+coroutine.yield(true, "Font", Enum.Font.Arcade)
+coroutine.yield(true, "Position", UDim2.new(0.05, 0, 0, 129))
+_call1596.BorderSizePixel = 0
+coroutine.yield(true, "BackgroundColor3", _call54)
+_call1596.TextSize = 10
+coroutine.yield(true, "Size", UDim2.new(0.43, 0, 0, 28))
+local _call1606 = Instance.new("UICorner")
+_call1606.AutoLocalize = false
+coroutine.yield(true, "Parent", _call1596)
+coroutine.yield(true, "CornerRadius", UDim.new(0, 6))
+_call1596.BackgroundColor3 = _call54
+workspace:FindFirstChild("Plots")
+_call1596.MouseButton1Click:Connect(function(...)
+
+end)
+local _call1622 = Instance.new("TextButton")
+_call1622.AutoLocalize = false
+coroutine.yield(true, "TextColor3", _call161)
+coroutine.yield(true, "Parent", _call184)
+_call1622.Text = "FPS BOOST"
+coroutine.yield(true, "Font", Enum.Font.Arcade)
+coroutine.yield(true, "Position", UDim2.new(0.52, 0, 0, 129))
+_call1622.BorderSizePixel = 0
+coroutine.yield(true, "BackgroundColor3", _call54)
+_call1622.TextSize = 10
+coroutine.yield(true, "Size", UDim2.new(0.43, 0, 0, 28))
+local _call1632 = Instance.new("UICorner")
+_call1632.AutoLocalize = false
+coroutine.yield(true, "Parent", _call1622)
+coroutine.yield(true, "CornerRadius", UDim.new(0, 6))
+_call1622.BackgroundColor3 = _call54
+_call1622.MouseButton1Click:Connect(function(...)
+
+end)
+local _call1646 = Instance.new("TextButton")
+_call1646.AutoLocalize = false
+coroutine.yield(true, "TextColor3", _call161)
+coroutine.yield(true, "Parent", _call184)
+_call1646.Text = "ANTI"
+coroutine.yield(true, "Font", Enum.Font.Arcade)
+coroutine.yield(true, "Position", UDim2.new(0.05, 0, 0, 161))
+_call1646.BorderSizePixel = 0
+coroutine.yield(true, "BackgroundColor3", _call54)
+_call1646.TextSize = 10
+coroutine.yield(true, "Size", UDim2.new(0.43, 0, 0, 28))
+local _call1656 = Instance.new("UICorner")
+_call1656.AutoLocalize = false
+coroutine.yield(true, "Parent", _call1646)
+coroutine.yield(true, "CornerRadius", UDim.new(0, 6))
+_call1646.BackgroundColor3 = _call54
+local _call1668 = Instance.new("TextLabel")
+_call1668.AutoLocalize = false
+coroutine.yield(true, "TextColor3", _call165)
+coroutine.yield(true, "Parent", _call1646)
+_call1668.Text = "sentry,bee"
+coroutine.yield(true, "Font", Enum.Font.Arcade)
+_call1668.BackgroundTransparency = 1
+coroutine.yield(true, "Position", UDim2.new(0, 2, 1, - 11))
+coroutine.yield(true, "TextXAlignment", Enum.TextXAlignment.Center)
+_call1668.TextSize = 7
+coroutine.yield(true, "Size", UDim2.new(1, - 4, 0, 10))
+_call1646.MouseButton1Click:Connect(function(...)
+
+end)
+local _call1686 = Instance.new("TextButton")
+_call1686.AutoLocalize = false
+coroutine.yield(true, "TextColor3", _call161)
+coroutine.yield(true, "Parent", _call184)
+_call1686.Text = "UNWALK"
+coroutine.yield(true, "Font", Enum.Font.Arcade)
+coroutine.yield(true, "Position", UDim2.new(0.52, 0, 0, 161))
+_call1686.BorderSizePixel = 0
+coroutine.yield(true, "BackgroundColor3", _call54)
+_call1686.TextSize = 10
+coroutine.yield(true, "Size", UDim2.new(0.43, 0, 0, 28))
+local _call1696 = Instance.new("UICorner")
+_call1696.AutoLocalize = false
+coroutine.yield(true, "Parent", _call1686)
+coroutine.yield(true, "CornerRadius", UDim.new(0, 6))
+_call1686.BackgroundColor3 = _call54
+_call1686.MouseButton1Click:Connect(function(...)
+
+end)
+fenv.setupAntiRagdoll = function(...)
+
+end
+fenv.stopAntiRagdoll = function(...)
+
+end
+game.Players.PlayerAdded:Connect(function(...)
+
+end)
+_LocalPlayer42.CharacterAdded:Connect(function(...)
+
+end)
+local _call1721 = Instance.new("TextButton")
+_call1721.AutoLocalize = false
+coroutine.yield(true, "TextColor3", _call161)
+coroutine.yield(true, "Parent", _call184)
+_call1721.Text = "ANTIRAGDOLL"
+coroutine.yield(true, "Font", Enum.Font.Arcade)
+coroutine.yield(true, "Position", UDim2.new(0.05, 0, 0, 193))
+_call1721.BorderSizePixel = 0
+coroutine.yield(true, "BackgroundColor3", _call54)
+_call1721.TextSize = 10
+coroutine.yield(true, "Size", UDim2.new(0.43, 0, 0, 28))
+local _call1731 = Instance.new("UICorner")
+_call1731.AutoLocalize = false
+coroutine.yield(true, "Parent", _call1721)
+coroutine.yield(true, "CornerRadius", UDim.new(0, 6))
+fenv.btnAntiRagdoll = _call1721
+_call1721.BackgroundColor3 = _call54
+_call1721.MouseButton1Click:Connect(function(...)
+
+end)
+task.wait(0.05)
+UDim2.new(0.43, 0, 0, 28)
+UDim2.new(0.52, 0, 0, 193)
+local _ = Enum.Font.Arcade
+error("Luraph Script:2090: Luraph Script:745: Luraph Script:709: internal 546: <25ms: infinitelooperror>")
